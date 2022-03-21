@@ -15,15 +15,15 @@ This is a script to help you automate the deployment of multiple Node.js applica
 All that you need to do is to download the latest version of `setup.sh` script and run it:
 
 ```bash
-wget https://raw.githubusercontent.com/bobbyiliev/node-app-hosting/main/setup.sh
+wget https://raw.githubusercontent.com/bobbyiliev/host-node/main/setup.sh
 ```
 
 ## Usage
 
 To create a new Node application, run the following command:
 
-```
-$ bash setup.sh
+```bash
+bash setup.sh
 ```
 
 You will be prompted to enter the following information:
