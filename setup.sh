@@ -37,10 +37,14 @@ function npm_check() {
 
 # Check if pm2 is installed
 function pm2_check() {
-    if [[ ! -f /usr/local/bin/pm2 ]]; then
-        echo "PM2 is not installed, please install it"
+
+    # Check for pm2 in /usr/bin OR /usr/local/bin
+    if [[ -f /usr/bin/pm2 ]] || [[ -f /usr/local/bin/pm2 ]]; then
+        true
+    else
+        echo "pm2 is not installed, please install it"
         echo "If pm2 is not installed, please install it with:"
-        echo "npm install pm2 -g"
+        echo "sudo npm install pm2 -g"
         exit 1
     fi
 }
@@ -103,11 +107,12 @@ function clone_repo() {
 function install_deps() {
     cd /var/www/$DOMAIN
     npm install
+    npm run build
 }
 
 # Start Node application with pm2 with specific name and port
 function start_node() {
-    pm2 start /var/www/$DOMAIN/app.js --name $DOMAIN -- --port $PORT
+    export PORT=$PORT ; cd /var/www/$DOMAIN/ ; pm2 start npm --name "$DOMAIN" -- start
 }
 
 # Get domain from user input
@@ -152,6 +157,11 @@ function get_repo() {
         echo "Please enter a git repo"
         get_repo
     done
+    # Check if repo ends with .git
+    if [[ $REPO != *".git"* ]]; then
+        # Add .git to repo
+        REPO=$REPO".git"
+    fi
 }
 
 # Get port from user input

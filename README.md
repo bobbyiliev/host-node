@@ -10,6 +10,24 @@ This is a script to help you automate the deployment of multiple Node.js applica
 - [Node.js](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04)
 - `netstat`: `sudo apt install net-tools`
 
+To install all of the above, run the following commands:
+
+```bash
+sudo apt update
+
+curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
+
+sudo bash /tmp/nodesource_setup.sh
+
+sudo apt update
+
+sudo apt-get install gcc g++ make
+
+sudo apt install nginx net-tools nodejs git -y
+
+npm install -g pm2
+```
+
 ## Setup
 
 All that you need to do is to download the latest version of `setup.sh` script and run it:
@@ -30,7 +48,7 @@ You will be prompted to enter the following information:
 
 - Domain name: Make sure to omit the `www.` and `http[s]://`.
 - GitHub repository: Make sure to use the full repository name, e.g. `https://github.com/bobbyiliev/nodejs-example.git`
-- Port: The port on which the application will be running on. **Each application must have a unique port**! You should define the Node application as an environment variable called `PORT` in order to use this feature.
+- Port: The port on which the application will be running on. **Each application must have a unique port**!
 
 ## Rundown of the script
 
